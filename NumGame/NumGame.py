@@ -128,7 +128,7 @@ while(True):
                 dfs(i, j, 1)
                 if ok:
                     ok_ps.append([i, j])
-        #ic(cnt, ok_ps)
+        ic(cnt, ok_ps)
         # cnt为最少走的步数，ok_ps数组里面存了可以从某个点获胜的数据
 
         # ic(a)
