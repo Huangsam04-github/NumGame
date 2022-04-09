@@ -11,12 +11,6 @@ from icecream import ic
 
 # Def part-----------------------------------------
 
-mv = [[1, 0], [-1, 0], [0, 1], [0, -1]]
-lock = {0: {}, 1: {}, 2: {}}
-cnt = 0
-ok = 0
-
-
 def dfs(x, y, step):
     global lock, ok
     lock[x][y] = 1
@@ -69,13 +63,13 @@ print()
 
 
 # 用户名
-user_name_file_path = "game_name.txt"
+user_name_file_name = "game_name.txt"
 
-if os.path.isfile(user_name_file_path):
-    with open(user_name_file_path, mode='r', encoding='utf-8') as user_name:
+if os.path.isfile(user_name_file_name):
+    with open(user_name_file_name, mode='r', encoding='utf-8') as user_name:
         print("欢迎回来，", user_name.read(), "!")
 else:
-    with open(user_name_file_path, mode="w", encoding="utf-8") as user_name:
+    with open(user_name_file_name, mode="w", encoding="utf-8") as user_name:
         user_name.write(input("请输入用户名："))
 print("-------------------------------------------")
 print()
@@ -87,22 +81,26 @@ while(True):
     # 模式为内置
     if game_mode == 0:
         # ic()
-        user_level_file_path = "user_level.txt"
-        if os.path.isfile(user_level_file_path):
+        user_level_file_name = "user_level.txt"
+        if os.path.isfile(user_level_file_name):
             # ic()
-            with open(user_level_file_path, mode='r', encoding='utf-8') as user_level:
+            with open(user_level_file_name, mode='r', encoding='utf-8') as user_level:
                 userlevel = int(user_level.read())
                 if userlevel > 10:
                     print("数值错误，请删除user_level.txt重置关卡关数")
                     sys.exit(0)
                 print("你现在进行到：", userlevel, "关，总共10关")
         else:
-            with open(user_level_file_path, mode="w", encoding="utf-8") as user_level:
+            with open(user_level_file_name, mode="w", encoding="utf-8") as user_level:
                 user_level.write(str(1))
                 userlevel = 1
                 print("你现在进行到第一关，总共10关")
 
         # 加载地图
+        mv = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+        lock = {0: {}, 1: {}, 2: {}}
+        cnt = 0
+        ok = 0
         maps_file_path = "maps\\"+str(userlevel)+".txt"
         # ic(maps_file_path)
         a = [['', '', ''], ['', '', ''], ['', '', '']]
@@ -173,9 +171,12 @@ while(True):
                 break
         print_map()
         print("恭喜通过第",userlevel,"关！正在保存……")
-        userlevel += 1
-        with open(user_level_file_path, mode="w", encoding="utf-8") as user_level:
-            user_level.write(str(userlevel))
-    
+        if userlevel == 10:
+            break
+        else:
+            userlevel += 1
+            with open(user_level_file_name, mode="w", encoding="utf-8") as user_level:
+                user_level.write(str(userlevel))
+        print("恭喜通过内置关卡！")
     # 模式为随机
     
