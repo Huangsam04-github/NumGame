@@ -7,7 +7,7 @@ import os
 import random
 import sys
 
-from icecream import ic
+# from icecream import ic
 
 # Def part-----------------------------------------
 
