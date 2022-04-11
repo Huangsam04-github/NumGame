@@ -126,7 +126,7 @@ while(True):
                 dfs(i, j, 1)
                 if ok:
                     ok_ps.append([i, j])
-        ic(cnt, ok_ps)
+        # ic(cnt, ok_ps)
         # cnt为最少走的步数，ok_ps数组里面存了可以从某个点获胜的数据
 
         # ic(a)
@@ -172,11 +172,12 @@ while(True):
         print_map()
         print("恭喜通过第",userlevel,"关！正在保存……")
         if userlevel == 10:
+            print("恭喜通过内置关卡！")
             break
         else:
             userlevel += 1
             with open(user_level_file_name, mode="w", encoding="utf-8") as user_level:
                 user_level.write(str(userlevel))
-        print("恭喜通过内置关卡！")
+        
     # 模式为随机
     
