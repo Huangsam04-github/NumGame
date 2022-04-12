@@ -1,5 +1,5 @@
 #Num_Game#
-#Ver:A0.4#
+#Ver:A0.6#
 
 # import part-----------------------------------------
 
@@ -137,7 +137,7 @@ while(True):
         last_click_row = -1
         last_click_column = -1
         click_row = -1
-        click_column = -1
+        click_column = -1 
         first_click = bool(1)
 
         walk = 0
