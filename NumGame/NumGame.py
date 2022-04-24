@@ -1,5 +1,5 @@
 #Num_Game#
-#Ver:A0.6#
+#Ver:A0.8#
 
 # import part-----------------------------------------
 
@@ -8,13 +8,14 @@ import random
 import sys
 import time
 
-from icecream import ic
+# from icecream import ic
 
 # Def part-----------------------------------------
 
+
 def dfs(x, y, step):
-    global lock, ok ,cnt
-    lock[x][y] = 1#把走过的改成=，记作1
+    global lock, ok, cnt
+    lock[x][y] = 1  # 把走过的改成=，记作1
     # ic(cnt)
 
     if step == cnt:
@@ -27,13 +28,15 @@ def dfs(x, y, step):
             continue
         # ic(xx,yy)
         dfs(xx, yy, step + 1)
-        lock[xx][yy]=0#增加这一行，如果走不通，回退的时候把=号要改回来
-        #break
+        lock[xx][yy] = 0  # 增加这一行，如果走不通，回退的时候把=号要改回来
+        # break
     # if not all(a[x][y] != '*' and lock[x].get(y) for x in range(3) for y in range(3)):
     #     return 99999
     # return step
 
+
 num_map = [['7', '8', '9'], ['4', '5', '6'], ['1', '2', '3']]
+
 
 def where_click(num):
     global click_row, click_column
@@ -51,7 +54,6 @@ def print_map():
     print("-------------------------------------------")
 
 # main-----------------------------------------
-
 
 
 # 简介
@@ -137,11 +139,11 @@ while(True):
 
         # rou 行
         # column 列
-        
+
         last_click_row = -1
         last_click_column = -1
         click_row = -1
-        click_column = -1 
+        click_column = -1
         first_click = bool(1)
 
         walk = 0
@@ -149,9 +151,9 @@ while(True):
             print_map()
             where_click(int(input("请输入你下一步要走哪个数字：")))
 
-            #ic(click_row,click_column)
-            #ic(last_click_row,last_click_column)
-            
+            # ic(click_row,click_column)
+            # ic(last_click_row,last_click_column)
+
             if(walk+1 != cnt or walk == cnt):
                 if last_click_column == -1 and last_click_row == -1:
                     if a[click_row][click_column] != "*":
@@ -162,8 +164,8 @@ while(True):
                     else:
                         print("输入错误")
                 else:
-                    if (abs(last_click_row-click_row)+abs(last_click_column-click_column)==1 and 
-                    a[click_row][click_column] != "*" and a[click_row][click_column] != "="):
+                    if (abs(last_click_row-click_row)+abs(last_click_column-click_column) == 1 and
+                            a[click_row][click_column] != "*" and a[click_row][click_column] != "="):
                         a[click_row][click_column] = "="
                         last_click_row = click_row
                         last_click_column = click_column
@@ -172,9 +174,9 @@ while(True):
                         print("输入错误")
             else:
                 break
-        
+
         print_map()
-        print("恭喜通过第",userlevel,"关！正在保存……")
+        print("恭喜通过第", userlevel, "关！正在保存……")
         if userlevel == 10:
             print("恭喜通过内置关卡！")
             break
@@ -182,7 +184,7 @@ while(True):
             userlevel += 1
             with open(user_level_file_name, mode="w", encoding="utf-8") as user_level:
                 user_level.write(str(userlevel))
-        
+
     # 模式为随机
     else:
         while(True):
@@ -190,7 +192,7 @@ while(True):
             a = [['7', '8', '9'], ['4', '5', '6'], ['1', '2', '3']]
             for i in range(3):
                 for j in range(3):
-                    if(random.randint(0,5) == 0):
+                    if(random.randint(0, 5) == 0):
                         a[i][j] = "*"
                     else:
                         cnt += 1
@@ -210,14 +212,14 @@ while(True):
                     if ok:
                         ok_ps.append([i, j])
 
-            if(ok_ps!=[]):
+            if(ok_ps != []):
                 break
             # ic(cnt, ok_ps, ok)
-            
+
         last_click_row = -1
         last_click_column = -1
         click_row = -1
-        click_column = -1 
+        click_column = -1
         first_click = bool(1)
 
         walk = 0
@@ -225,9 +227,9 @@ while(True):
             print_map()
             where_click(int(input("请输入你下一步要走哪个数字：")))
 
-            #ic(click_row,click_column)
-            #ic(last_click_row,last_click_column)
-            
+            # ic(click_row,click_column)
+            # ic(last_click_row,last_click_column)
+
             if(walk+1 != cnt or walk == cnt):
                 if last_click_column == -1 and last_click_row == -1:
                     if a[click_row][click_column] != "*":
@@ -238,8 +240,8 @@ while(True):
                     else:
                         print("输入错误")
                 else:
-                    if (abs(last_click_row-click_row)+abs(last_click_column-click_column)==1 and 
-                    a[click_row][click_column] != "*" and a[click_row][click_column] != "="):
+                    if (abs(last_click_row-click_row)+abs(last_click_column-click_column) == 1 and
+                            a[click_row][click_column] != "*" and a[click_row][click_column] != "="):
                         a[click_row][click_column] = "="
                         last_click_row = click_row
                         last_click_column = click_column
@@ -248,7 +250,6 @@ while(True):
                         print("输入错误")
             else:
                 break
-        
+
         print_map()
         print("恭喜通关！")
-            
