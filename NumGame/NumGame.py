@@ -1,5 +1,5 @@
 #Num_Game#
-#Ver:A0.6#
+#Ver:A0.7#
 
 # import part-----------------------------------------
 
@@ -8,7 +8,7 @@ import random
 import sys
 import time
 
-from icecream import ic
+#from icecream import ic
 
 # Def part-----------------------------------------
 
