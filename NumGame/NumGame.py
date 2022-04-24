@@ -198,7 +198,7 @@ while(True):
             mv = [[1, 0], [-1, 0], [0, 1], [0, -1]]
             lock = {0: {}, 1: {}, 2: {}}
             # cnt = 0
-            ok = 0s
+            ok = 0
             ok_ps = []
             for i in range(3):
                 for j in range(3):
