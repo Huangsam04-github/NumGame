@@ -6,26 +6,29 @@
 import os
 import random
 import sys
+import time
 
-# from icecream import ic
+from icecream import ic
 
 # Def part-----------------------------------------
 
 def dfs(x, y, step):
-    global lock, ok
-    lock[x][y] = 1
+    global lock, ok ,cnt
+    lock[x][y] = 1#把走过的改成=，记作1
+    ic(cnt)
+
     if step == cnt:
         ok = 1
         return
-    did = 0
     for i in mv:
         xx = x + i[0]
         yy = y + i[1]
         if xx < 0 or xx >= 3 or yy < 0 or yy >= 3 or a[xx][yy] == '*' or lock[xx].get(yy):
             continue
+        ic(xx,yy)
         dfs(xx, yy, step + 1)
-        did = 1
-        break
+        lock[xx][yy]=0#增加这一行，如果走不通，回退的时候把=号要改回来
+        #break
     # if not all(a[x][y] != '*' and lock[x].get(y) for x in range(3) for y in range(3)):
     #     return 99999
     # return step
@@ -114,7 +117,7 @@ while(True):
                     if t[j] != '*':
                         cnt += 1
             # ic(a)
-        # ic(cnt)
+        ic(cnt)
         # 函数跑最小步数
         ok_ps = []
         for i in range(3):
@@ -123,10 +126,12 @@ while(True):
                     continue
                 lock = {0: {}, 1: {}, 2: {}}
                 ok = 0
+                print("x,y",i,j)
                 dfs(i, j, 1)
                 if ok:
                     ok_ps.append([i, j])
-        # ic(cnt, ok_ps)
+
+        ic(cnt, ok_ps)
         # cnt为最少走的步数，ok_ps数组里面存了可以从某个点获胜的数据
 
         # ic(a)
@@ -142,6 +147,7 @@ while(True):
 
         walk = 0
 
+        '''
         while(True):
             print_map()
             where_click(int(input("请输入你下一步要走哪个数字：")))
@@ -169,6 +175,7 @@ while(True):
                         print("输入错误")
             else:
                 break
+        '''
         print_map()
         print("恭喜通过第",userlevel,"关！正在保存……")
         if userlevel == 10:
@@ -180,4 +187,34 @@ while(True):
                 user_level.write(str(userlevel))
         
     # 模式为随机
-    
+    else:
+        #while(True):
+        cnt = 0
+        a = [['7', '8', '9'], ['4', '5', '6'], ['1', '2', '3']]
+        for i in range(3):
+            for j in range(3):
+                if(random.randint(0,5) == 0):
+                    a[i][j] = "*"
+                else:
+                    cnt += 1
+        # ic(a)
+        mv = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+        lock = {0: {}, 1: {}, 2: {}}
+        # cnt = 0
+        ok = 0
+        ok_ps = []
+        for i in range(3):
+            for j in range(3):
+                if a[i][j] == '*':
+                    continue
+                lock = {0: {}, 1: {}, 2: {}}
+                ok = 0
+                dfs(i, j, 1)
+                if ok:
+                    ok_ps.append([i, j])
+        ic(cnt, ok_ps, ok)
+        print_map()
+        break
+
+            # cnt为最少走的步数，ok_ps数组里面存了可以从某个点获胜的数据
+            
