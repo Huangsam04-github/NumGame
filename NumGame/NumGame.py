@@ -1,5 +1,5 @@
 #Num_Game#
-#Ver:A0.8#
+#Ver:A0.9#
 
 # import part-----------------------------------------
 
@@ -17,7 +17,6 @@ def dfs(x, y, step):
     global lock, ok, cnt
     lock[x][y] = 1  # 把走过的改成=，记作1
     # ic(cnt)
-
     if step == cnt:
         ok = 1
         return
@@ -34,7 +33,6 @@ def dfs(x, y, step):
     #     return 99999
     # return step
 
-
 num_map = [['7', '8', '9'], ['4', '5', '6'], ['1', '2', '3']]
 
 
@@ -48,6 +46,7 @@ def where_click(num):
 
 
 def print_map():
+    print("NumGame A0.9 by Huangsam04")
     print("-------------------------------------------")
     for i in range(3):
         print(a[i][0], a[i][1], a[i][2])
@@ -57,7 +56,7 @@ def print_map():
 
 
 # 简介
-print("数字键盘游戏")
+print("数字键盘游戏 NumGame A0.9 By huangsam04")
 print("最好使用九宫格键盘进行游玩")
 print("游戏会自动输出一个表格，“*”表明这个方格不能经过，数字表明这个方格可以经过")
 print("你的任务就是把所有可以走的数字都走一遍，并且尽量用最少的步数，走过的数字会变成 = ")
@@ -148,6 +147,7 @@ while(True):
 
         walk = 0
         while(True):
+            os.system("CLS")
             print_map()
             where_click(int(input("请输入你下一步要走哪个数字：")))
 
@@ -163,6 +163,7 @@ while(True):
                         walk += 1
                     else:
                         print("输入错误")
+                        time.sleep(1)
                 else:
                     if (abs(last_click_row-click_row)+abs(last_click_column-click_column) == 1 and
                             a[click_row][click_column] != "*" and a[click_row][click_column] != "="):
@@ -172,18 +173,24 @@ while(True):
                         walk += 1
                     else:
                         print("输入错误")
+                        time.sleep(1)
             else:
                 break
-
+        a[click_row][click_column] = "="
+        os.system("CLS")
         print_map()
         print("恭喜通过第", userlevel, "关！正在保存……")
         if userlevel == 10:
-            print("恭喜通过内置关卡！")
+            print("恭喜通过内置关卡！10秒钟后即将跳转到主页面")
+            time.sleep(10)
             break
         else:
             userlevel += 1
             with open(user_level_file_name, mode="w", encoding="utf-8") as user_level:
                 user_level.write(str(userlevel))
+            print("保存成功！5秒钟后跳转下一关卡")
+            time.sleep(5)
+
 
     # 模式为随机
     else:
@@ -224,6 +231,7 @@ while(True):
 
         walk = 0
         while(True):
+            os.system("CLS")
             print_map()
             where_click(int(input("请输入你下一步要走哪个数字：")))
 
@@ -239,6 +247,7 @@ while(True):
                         walk += 1
                     else:
                         print("输入错误")
+                        time.sleep(1)
                 else:
                     if (abs(last_click_row-click_row)+abs(last_click_column-click_column) == 1 and
                             a[click_row][click_column] != "*" and a[click_row][click_column] != "="):
@@ -248,6 +257,7 @@ while(True):
                         walk += 1
                     else:
                         print("输入错误")
+                        time.sleep(1)
             else:
                 break
 
